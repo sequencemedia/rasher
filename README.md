@@ -56,7 +56,7 @@ rasher
   })
 ```
 
-Here, there is an additional method call between `find` and `then`. 
+Here, there is an additional method call between `find` and `then`: it is `delegateTo`.
 
 We use `delegateTo` to query the DOM for an element, using a selector, exactly as we do with `find`.
 
