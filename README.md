@@ -123,11 +123,11 @@ Individual handlers are identified by index, and invoking `listAll` will return 
 
 ```
 {
-	size: () => { },
-	node: (index) => { },
-	type: (index) => { }, 
-	stop: (index) => { },
-	indexOf: (element) => { }
+  size: () => { },
+  node: (index) => { },
+  type: (index) => { }, 
+  stop: (index) => { },
+  indexOf: (element) => { }
 }
 ```
 
