@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rasher JS",
   "main": "./index.js",
   "scripts": {
@@ -14,6 +14,7 @@
   "engines": {
     "node": ">=7.0.0"
   },
+  "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "dependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^7.0.0",
