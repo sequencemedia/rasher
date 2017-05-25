@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Rasher JS",
   "main": "./index.js",
   "scripts": {
