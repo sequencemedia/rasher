@@ -1,7 +1,2 @@
 **/node_modules/**/*
-**/bower_components/**/*
-**/public/assets/css/**/*
-**/public/assets/js/app/**/*
-**/public/assets/js/lib/**/*
-**/.sass-cache
 **/npm-debug.log
