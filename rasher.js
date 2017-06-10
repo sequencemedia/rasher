@@ -1,5 +1,4 @@
-require('babel-register')
-
+//
 if (!global.document || !global.window) {
   const {
     mocks: {
