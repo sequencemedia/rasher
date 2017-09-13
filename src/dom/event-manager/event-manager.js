@@ -24,8 +24,6 @@ const attachEvent = (type, element, handler) => { element.attachEvent(`on${type}
 
 const detachEvent = (type, element, handler) => { element.detachEvent(`on${type}`, handler) }
 
-export const yep = 'nope'
-
 export const attach = (ATTACH === 1)
   ? attachEventListener
   : (ATTACH === 3)
