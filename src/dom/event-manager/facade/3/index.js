@@ -12,4 +12,3 @@ export const eventFacade = (type) => (type === 'change')
     : type.indexOf('key') < 0
       ? MouseEventFacade
       : KeyboardEventFacade
-

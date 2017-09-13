@@ -1,13 +1,8 @@
 {
   "compact": true,
   "presets": [
-    "es2015",
+    "env",
     "stage-0",
     "stage-1"
-  ],
-  "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-runtime"
   ]
 }

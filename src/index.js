@@ -77,7 +77,9 @@ const delegateFacade = (rasher, list, node, selector) => ({
     return {
       do: (handler, { context, phase } = {}) => {
         if ((handler || false).constructor !== Function) return null
+
         const delegate = rasher.delegate()
+
         list.push({
           type,
           node,
@@ -96,7 +98,9 @@ const listenerFacade = (rasher, list, node) => ({
     return {
       do: (handler, { context, phase } = {}) => {
         if ((handler || false).constructor !== Function) return null
+
         const listener = rasher.listener()
+
         list.push({
           type,
           node,
@@ -159,15 +163,18 @@ const find = (selector) => ({
     },
     toArray: () => {
       const q = new Query()
+
       return (
-        Array.from(
-          q.queryForNodeList(selector)
-        )
-        .concat(
-          Array.from(
-            q.queryForNodeList(delegate)
+        Array
+          .from(
+            q.queryForNodeList(selector)
           )
-        )
+          .concat(
+            Array
+              .from(
+                q.queryForNodeList(delegate)
+              )
+          )
       )
     }
   }),

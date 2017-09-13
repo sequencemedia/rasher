@@ -12,9 +12,9 @@ export class EventManager {
   constructor () {
     return (
       eventManager || (
-      eventManager = (this instanceof EventManager
-        ? this
-        : new EventManager()))
+        eventManager = (this instanceof EventManager
+          ? this
+          : new EventManager()))
     )
   }
 
