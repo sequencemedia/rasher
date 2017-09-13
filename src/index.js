@@ -12,7 +12,11 @@ import {
   Query
 } from './dom/query'
 
-const stopFactory = (subscription) => () => { subscription.stop() }
+function stopFactory (subscription) {
+  return () => {
+    subscription.stop()
+  }
+}
 
 const has = (array, index) => (
   typeof index === 'number' /* IS NUMBER */ &&
@@ -43,7 +47,7 @@ const listAll = (subscriptionList) => ({ // get length () { return subscriptionL
   size: () => subscriptionList.length
 })
 
-const delegateRasher = () => {
+function delegateRasher () {
   let delegate
   let query
   let rasher
@@ -57,7 +61,7 @@ const delegateRasher = () => {
   }
 }
 
-const listenerRasher = () => {
+function listenerRasher () {
   let listener
   let query
   let rasher
@@ -231,6 +235,6 @@ const find = (selector) => ({
   }
 })
 
-export class Rasher {
+export default class Rasher {
   find = find
 }

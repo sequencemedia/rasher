@@ -19,12 +19,10 @@ Rasher's components are exposed as ES6 classes, too, so if you want to you can u
 
 With Rasher, `listeners` and `delegates` are indistinguishable, and have only a simple difference in how they are applied.
 
-#### Listeners 
+#### Listeners
 
 ```
-import { 
-  Rasher 
-} from 'rasher/lib'
+import Rasher from 'rasher'
 
 const rasher = new Rasher()
 
@@ -39,12 +37,10 @@ First, we use `find` to query the DOM for elements, using a selector.
 
 Second, we use `then` to interact with the DOM elements which have been found.
 
-#### Delegates 
+#### Delegates
 
 ```
-import { 
-  Rasher 
-} from 'rasher/lib'
+import Rasher from 'rasher'
 
 const rasher = new Rasher()
 
@@ -63,39 +59,39 @@ We use `delegateTo` to query the DOM for an element, using a selector, exactly a
 
 ### Attaching handlers
 
-In either case, whether we want to attach a `listener` or a `delegate`, we do the work with the function given to `then`. 
+In either case, whether we want to attach a `listener` or a `delegate`, we do the work with the function given to `then`.
 
 The function given to `then` is the `callOut`.
 
 The `callOut` is called once for each DOM element matching the query. It receives three arguments:
- 
+
 1. A plain object
 2. An `index`
 2. A `length`
 
-So: 
+So:
 ```
 rasher
   .find('form input[type="radio"]')
-  .then((r, index, length) => { 
+  .then((r, index, length) => {
     /* */
   })
 ```
 
 The plain object is named `r`. The `index` identifies the position of the current _element_ as though iterating through an array, while `length` is the total number of _elements_ to iterate over.
 
-Or: 
+Or:
 ```
 rasher
   .find('form input[type="radio"]')
   .delegateTo('form')
-  .then((r, index, length) => { 
+  .then((r, index, length) => {
     /* */
   })
 ```
 The plain object is named `r`. Here, the `index` identifies the position of the current _delegate element_ as though iterating through an array, while `length` is the total number of _delegate elements_ to iterate over.
 
-In either case, the plain object is the entry point for attaching handlers. It follows the pattern `on` ... `do`. 
+In either case, the plain object is the entry point for attaching handlers. It follows the pattern `on` ... `do`.
 
 ```
 r.on('click').do((event) => { /* */ })
@@ -103,15 +99,15 @@ r.on('click').do((event) => { /* */ })
 
 ### Detaching handlers
 
-Similarly, whether we want to detach a `listener` or a `delegate`, we do the work with the return value from `then`. 
+Similarly, whether we want to detach a `listener` or a `delegate`, we do the work with the return value from `then`.
 
 ```
 const R = rasher
   .find('form input[type="radio"]')
-  .then((r, index, length) => { 
+  .then((r, index, length) => {
     /* */
   })
-  
+
 R.stopAll()
 ```
 
@@ -125,7 +121,7 @@ Individual handlers are identified by index, and invoking `listAll` will return 
 {
   size: () => { },
   node: (index) => { },
-  type: (index) => { }, 
+  type: (index) => { },
   stop: (index) => { },
   indexOf: (element) => { }
 }
