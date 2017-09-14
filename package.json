@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git@github.com/sequencemedia/RasherJS.git"
   },
-  "author": "Jonathan Perry for Sequence Media Ltd",
+  "author": "Jonathan Perry for Sequence Media Limited",
   "license": "MIT",
   "engines": {
     "node": ">=7.0.0"
