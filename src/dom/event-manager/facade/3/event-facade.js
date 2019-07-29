@@ -22,7 +22,7 @@ function ingestEvent (facadeMap, event, eventFacade) {
   let key
   for (key in facadeMap) {
     if (key in event) {
-      let KEY = facadeMap[key]
+      const KEY = facadeMap[key]
       eventFacade[KEY] = event[key]
     }
   }

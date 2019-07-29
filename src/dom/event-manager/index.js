@@ -19,9 +19,12 @@ export class EventManager {
   }
 
   attach = attach
+
   detach = detach
 
   eventFacadeFor = eventFacadeFor
+
   normalizeEvent = normalizeEvent
+
   eventTargetFor = eventTargetFor
 }

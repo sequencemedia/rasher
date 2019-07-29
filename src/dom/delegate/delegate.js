@@ -1,14 +1,14 @@
 import {
   FACADE
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import {
   notSupported
-} from '../rasher'
+} from '~/dom/rasher'
 
 import {
   DelegateManager
-} from '../delegate-manager'
+} from '~/dom/delegate-manager'
 
 const delegateManager = new DelegateManager()
 
@@ -41,7 +41,7 @@ const delegate = (type, element, selector, handler, context) => {
               if ((nodeName = (targetNode = event.srcElement).nodeName.toLowerCase()) === 'select') { // eslint-disable-line
                 targetNode.attachEvent('onchange', subscription.delegate)
               } else if (nodeName === 'input') {
-                let nodeType = targetNode.type
+                const nodeType = targetNode.type
                 if (nodeType === 'text' || nodeType === 'password') {
                   subscription.value = targetNode.value
                 } else if (nodeType === 'radio' || nodeType === 'checkbox') {
@@ -65,7 +65,7 @@ const delegate = (type, element, selector, handler, context) => {
               if ((nodeName = (targetNode = event.srcElement).nodeName.toLowerCase()) === 'select') { // eslint-disable-line
                 targetNode.detachEvent('onchange', subscription.delegate)
               } else if (nodeName === 'input') {
-                let nodeType = targetNode.type
+                const nodeType = targetNode.type
                 if (nodeType === 'text' || nodeType === 'password') {
                   if (subscription.value !== targetNode.value) { // no need to remember state of control (it's deactivating)
                     targetNode.fireEvent('onchange', document.createEventObject())

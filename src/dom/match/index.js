@@ -1,10 +1,10 @@
 import {
   MATCH
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import {
   Query
-} from '../query'
+} from '~/dom/query'
 
 import Sizzle from 'sizzle'
 

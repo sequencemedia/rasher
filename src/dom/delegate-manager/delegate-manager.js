@@ -1,23 +1,23 @@
 import {
   ATTACH,
   DETACH
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import {
   notSupported
-} from '../rasher'
+} from '~/dom/rasher'
 
 import {
   EventManager
-} from '../event-manager'
+} from '~/dom/event-manager'
 
 import {
   Match
-} from '../match'
+} from '~/dom/match'
 
 import {
   Query
-} from '../query'
+} from '~/dom/query'
 
 const eventManager = new EventManager()
 
@@ -97,6 +97,8 @@ export const detach = (DETACH === 2)
 
 export class DelegateManager {
   create = create
+
   attach = attach
+
   detach = detach
 }

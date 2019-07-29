@@ -1,15 +1,15 @@
 import {
   ATTACH,
   DETACH
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import {
   notSupported
-} from '../rasher'
+} from '~/dom/rasher'
 
 import {
   EventManager
-} from '../event-manager'
+} from '~/dom/event-manager'
 
 const eventManager = new EventManager()
 

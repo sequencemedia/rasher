@@ -2,11 +2,11 @@ import {
   ATTACH,
   DETACH,
   FACADE
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import {
   notSupported
-} from '../rasher'
+} from '~/dom/rasher'
 
 import {
   eventFacade as eventFacadeThree

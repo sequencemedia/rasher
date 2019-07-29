@@ -6,6 +6,8 @@ import {
 
 export class DelegateManager {
   create = create
+
   attach = attach
+
   detach = detach
 }

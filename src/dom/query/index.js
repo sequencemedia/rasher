@@ -1,7 +1,7 @@
 import {
   QUERY,
   MATCH
-} from '../../bom/bom'
+} from '~/bom/rasher'
 
 import Sizzle from 'sizzle'
 

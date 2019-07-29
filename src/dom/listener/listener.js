@@ -1,6 +1,6 @@
 import {
   ListenerManager
-} from '../listener-manager'
+} from '~/dom/listener-manager'
 
 const listenerManager = new ListenerManager()
 

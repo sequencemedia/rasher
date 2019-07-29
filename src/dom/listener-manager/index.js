@@ -6,6 +6,8 @@ import {
 
 export class ListenerManager {
   create = create
+
   attach = attach
+
   detach = detach
 }

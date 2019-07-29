@@ -4,11 +4,14 @@
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "main": "./index.js",
   "scripts": {
-    "build": "babel src -d lib",
-    "build:watch": "babel src -d lib -w",
-    "prepublishOnly": "npm run build",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "prepublishOnly": "npm run clean && npm run build",
+    "clean": "rm -rf lib",
+    "babel": "babel src -d lib",
+    "build": "npm run babel --",
+    "build:watch": "npm run build -- -w",
+    "lint": "eslint *.js src",
+    "lint:fix": "npm run lint -- --fix",
+    "pre-commit": "npm run lint:fix && npm run clean && npm run build && git add lib"
   },
   "repository": {
     "type": "git",
@@ -16,26 +19,31 @@
   },
   "author": "Jonathan Perry for Sequence Media Limited",
   "license": "MIT",
-  "engines": {
-    "node": ">=7.0.0"
-  },
   "dependencies": {
     "mock-browser": "^0.92.14",
-    "sizzle": "^2.3.3"
+    "sizzle": "^2.3.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
-    "eslint": "^4.6.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-eslint": "^10.0.2",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "core-js": "^3.1.4",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-import-resolver-babel-module": "^5.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^3.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit"
+    }
   }
 }
