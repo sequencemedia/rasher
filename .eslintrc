@@ -1,10 +1,18 @@
 {
   "env": {
-  	"node": true
+    "node": true
   },
   "extends": "standard",
   "parserOptions": {
     "ecmaVersion": 6
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "overrides": [
+   {
+    "files": ["src/index.js"],
+       "rules": {
+          "no-cond-assign": "off"
+       }
+   }
+  ]
 }
