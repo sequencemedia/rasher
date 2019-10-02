@@ -11,7 +11,7 @@ export function subscribe (type, element, handler, context, phase = false) {
   }
   listenerManager.attach(type, element, subscription)
   return {
-    stop: () => {
+    stop () {
       listenerManager.detach(type, element, subscription)
     }
   }

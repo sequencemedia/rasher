@@ -14,24 +14,20 @@ import {
   notSupported
 } from '~/dom/rasher'
 
-import {
-  eventFacade as eventFacadeThree
-} from './facade/3'
+import eventListenerFacade from './event-listener-facade'
 
-import {
-  eventFacade as eventFacadeSeven
-} from './facade/7'
+import eventFacade from './event-facade'
 
-const THREE = SUPPORTS_ADD + SUPPORTS_REMOVE
-const SEVEN = SUPPORTS_ATTACH + SUPPORTS_DETACH
+const EVENT_LISTENER = SUPPORTS_ADD + SUPPORTS_REMOVE
+const EVENT = SUPPORTS_ATTACH + SUPPORTS_DETACH
 
-const attachEventListener = (type, element, handler, phase) => { element.addEventListener(type, handler, phase) }
+function attachEventListener (type, element, handler, phase) { element.addEventListener(type, handler, phase) }
 
-const detachEventListener = (type, element, handler, phase) => { element.removeEventListener(type, handler, phase) }
+function detachEventListener (type, element, handler, phase) { element.removeEventListener(type, handler, phase) }
 
-const attachEvent = (type, element, handler) => { element.attachEvent('on'.concat(type), handler) }
+function attachEvent (type, element, handler) { element.attachEvent('on'.concat(type), handler) }
 
-const detachEvent = (type, element, handler) => { element.detachEvent('on'.concat(type), handler) }
+function detachEvent (type, element, handler) { element.detachEvent('on'.concat(type), handler) }
 
 export const attach = (
   (ATTACH === SUPPORTS_ADD)
@@ -56,8 +52,9 @@ export const eventTargetFor = (e) => {
   )
 }
 
-export const eventFacadeFor = (FACADE === THREE)
-  ? eventFacadeThree
-  : (FACADE === SEVEN)
-    ? eventFacadeSeven
-    : notSupported
+export const eventFacadeFor = (
+  (FACADE === EVENT_LISTENER)
+    ? eventListenerFacade
+    : (FACADE === EVENT)
+      ? eventFacade
+      : notSupported)

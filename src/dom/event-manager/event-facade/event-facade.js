@@ -6,15 +6,15 @@ function initialize (event, currentTarget) {
 }
 
 class EventFacade {
-  stopPropagation = () => {
+  stopPropagation () {
     this.originalEvent.cancelBubble = true
   }
 
-  preventDefault = () => {
+  preventDefault () {
     this.originalEvent.returnValue = false
   }
 
-  stop = () => {
+  stop () {
     const {
       originalEvent
     } = this

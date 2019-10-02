@@ -11,7 +11,7 @@ import {
 } from './dom/query'
 
 function stopFactory (subscription) {
-  return () => {
+  return function stop () {
     subscription.stop()
   }
 }
@@ -22,7 +22,7 @@ const has = (array, index) => (
   array.length > index /* UPPER BOUND (length more than index) */
 )
 
-const stopAll = (subscriptionList) => {
+function stopAll (subscriptionList) {
   if (subscriptionList.length === 0) return false
   let subscription
   while (subscription = subscriptionList.shift()) {
@@ -31,31 +31,35 @@ const stopAll = (subscriptionList) => {
   return true
 }
 
-const listAll = (subscriptionList) => ({ // get length () { return subscriptionList.length } // old IE safe?
-  node: (index) => has(subscriptionList, index) ? subscriptionList[index].node : null,
-  type: (index) => has(subscriptionList, index) ? subscriptionList[index].type : null,
-  stop: (index) => {
-    if (has(subscriptionList, index)) {
-      subscriptionList.splice(index, 1).shift().stop()
-      return true
-    }
-    return false
-  },
-  indexOf: (node) => subscriptionList.findIndex(({ node: n }) => node === n),
-  size: () => subscriptionList.length
-})
+function listAll (subscriptionList) {
+  return { // get length () { return subscriptionList.length } // old IE safe?
+    node (index) { return has(subscriptionList, index) ? subscriptionList[index].node : null },
+    type (index) { return has(subscriptionList, index) ? subscriptionList[index].type : null },
+    stop (index) {
+      if (has(subscriptionList, index)) {
+        subscriptionList.splice(index, 1).shift().stop()
+        return true
+      }
+      return false
+    },
+    indexOf (node) { return subscriptionList.findIndex(({ node: n }) => node === n) },
+    size () { return subscriptionList.length }
+  }
+}
 
 function delegateRasher () {
   let delegate
   let query
   let rasher
   return {
-    delegate: () => delegate || (delegate = new Delegate()),
-    query: () => query || (query = new Query()),
-    rasher: () => rasher || (rasher = {
-      stopAll,
-      listAll
-    })
+    delegate () { return delegate || (delegate = new Delegate()) },
+    query () { return query || (query = new Query()) },
+    rasher () {
+      return rasher || (rasher = {
+        stopAll,
+        listAll
+      })
+    }
   }
 }
 
@@ -64,67 +68,137 @@ function listenerRasher () {
   let query
   let rasher
   return {
-    listener: () => listener || (listener = new Listener()),
-    query: () => query || (query = new Query()),
-    rasher: () => rasher || (rasher = {
-      stopAll,
-      listAll
-    })
+    listener () { return listener || (listener = new Listener()) },
+    query () { return query || (query = new Query()) },
+    rasher () {
+      return rasher || (rasher = {
+        stopAll,
+        listAll
+      })
+    }
   }
 }
 
-const delegateFacade = (rasher, list, node, selector) => ({
-  on: (type) => {
-    if (typeof type !== 'string') return null
-    return {
-      do: (handler, { context, phase } = {}) => {
-        if ((handler || false).constructor !== Function) return null
+function delegateFacade (rasher, list, node, selector) {
+  return {
+    on (type) {
+      if (typeof type !== 'string') return null
+      return {
+        do (handler, { context, phase } = {}) {
+          if ((handler || false).constructor !== Function) return null
 
-        const delegate = rasher.delegate()
+          const delegate = rasher.delegate()
 
-        list.push({
-          type,
-          node,
-          stop: stopFactory(
-            delegate.subscribe(type, node, selector, handler, context, phase)
-          )
-        })
+          list.push({
+            type,
+            node,
+            stop: stopFactory(
+              delegate.subscribe(type, node, selector, handler, context, phase)
+            )
+          })
+        }
       }
     }
   }
-})
+}
 
-const listenerFacade = (rasher, list, node) => ({
-  on: (type) => {
-    if (typeof type !== 'string') return null
-    return {
-      do: (handler, { context, phase } = {}) => {
-        if ((handler || false).constructor !== Function) return null
+function listenerFacade (rasher, list, node) {
+  return {
+    on (type) {
+      if (typeof type !== 'string') return null
+      return {
+        do (handler, { context, phase } = {}) {
+          if ((handler || false).constructor !== Function) return null
 
-        const listener = rasher.listener()
+          const listener = rasher.listener()
 
-        list.push({
-          type,
-          node,
-          stop: stopFactory(
-            listener.subscribe(type, node, handler, context, phase)
-          )
-        })
+          list.push({
+            type,
+            node,
+            stop: stopFactory(
+              listener.subscribe(type, node, handler, context, phase)
+            )
+          })
+        }
       }
     }
   }
-})
+}
 
-const find = (selector) => ({
-  delegateTo: (delegate) => ({
-    then: (callOut) => {
-      const rasher = delegateRasher()
+export function find (selector) {
+  return {
+    delegateTo (delegate) {
+      return {
+        then (callOut) {
+          const rasher = delegateRasher()
+          const q = rasher.query()
+          const k = rasher.rasher()
+
+          if ((callOut || false).constructor !== Function) return { stopAll () { return false }, listAll () { return [] } }
+
+          const nodeList = q.queryForNodeList(delegate)
+
+          let i = 0
+          const j = nodeList.length
+
+          const subscriptionList = [] // always an array
+
+          if (i < j) {
+            do {
+              const subscriptionNode = nodeList[i]
+              const face = delegateFacade(rasher, subscriptionList, subscriptionNode, selector)
+              const list = ({ node } = {}) => (subscriptionNode === node)
+              const each = (x) => {
+                const z = subscriptionList.findIndex((y) => x === y)
+                subscriptionList
+                  .splice(z, 1)
+                  .shift().stop()
+              }
+              callOut.call(subscriptionNode, face, {
+                node () { return subscriptionNode },
+                stop () {
+                  const a = subscriptionList.filter(list)
+                  if (a.length === 0) return false
+                  a.forEach(each)
+                  return true
+                },
+                index () { return subscriptionList.findIndex(list) },
+                size () { return subscriptionList.length }
+              }, i, j)
+            } while ((i = i + 1) < j)
+          }
+
+          return {
+            stopAll () { return k.stopAll(subscriptionList) },
+            listAll () { return k.listAll(subscriptionList) }
+          }
+        },
+        toArray () {
+          const q = new Query()
+
+          return (
+            Array
+              .from(
+                q.queryForNodeList(selector)
+              )
+              .concat(
+                Array
+                  .from(
+                    q.queryForNodeList(delegate)
+                  )
+              )
+          )
+        }
+      }
+    },
+    then (callOut) {
+      if ((callOut || false).constructor !== Function) return { stopAll () { return false }, listAll () { return [] } }
+
+      const rasher = listenerRasher()
       const q = rasher.query()
       const k = rasher.rasher()
 
-      if ((callOut || false).constructor !== Function) return { stopAll: () => false, listAll: () => [] }
-
-      const nodeList = q.queryForNodeList(delegate)
+      const nodeList = q.queryForNodeList(selector)
 
       let i = 0
       const j = nodeList.length
@@ -134,8 +208,8 @@ const find = (selector) => ({
       if (i < j) {
         do {
           const subscriptionNode = nodeList[i]
-          const face = delegateFacade(rasher, subscriptionList, subscriptionNode, selector)
-          const list = ({ node }) => (subscriptionNode === node)
+          const face = listenerFacade(rasher, subscriptionList, subscriptionNode)
+          const list = ({ node } = {}) => (subscriptionNode === node)
           const each = (x) => {
             const z = subscriptionList.findIndex((y) => x === y)
             subscriptionList
@@ -143,95 +217,31 @@ const find = (selector) => ({
               .shift().stop()
           }
           callOut.call(subscriptionNode, face, {
-            node: () => subscriptionNode,
-            stop: () => {
+            node () { return subscriptionNode },
+            stop () {
               const a = subscriptionList.filter(list)
               if (a.length === 0) return false
               a.forEach(each)
               return true
             },
-            index: () => (
-              subscriptionList.findIndex(list)
-            ),
-            size: () => subscriptionList.length
+            index () { return subscriptionList.findIndex(list) },
+            size () { return subscriptionList.length }
           }, i, j)
         } while ((i = i + 1) < j)
       }
 
       return {
-        stopAll: () => k.stopAll(subscriptionList),
-        listAll: () => k.listAll(subscriptionList)
+        stopAll () { return k.stopAll(subscriptionList) },
+        listAll () { return k.listAll(subscriptionList) }
       }
     },
-    toArray: () => {
+    toArray () {
       const q = new Query()
-
-      return (
-        Array
-          .from(
-            q.queryForNodeList(selector)
-          )
-          .concat(
-            Array
-              .from(
-                q.queryForNodeList(delegate)
-              )
-          )
-      )
+      const nodeList = q.queryForNodeList(selector)
+      return Array.from(nodeList)
     }
-  }),
-  then: (callOut) => {
-    if ((callOut || false).constructor !== Function) return { stopAll: () => false, listAll: () => [] }
-
-    const rasher = listenerRasher()
-    const q = rasher.query()
-    const k = rasher.rasher()
-
-    const nodeList = q.queryForNodeList(selector)
-
-    let i = 0
-    const j = nodeList.length
-
-    const subscriptionList = [] // always an array
-
-    if (i < j) {
-      do {
-        const subscriptionNode = nodeList[i]
-        const face = listenerFacade(rasher, subscriptionList, subscriptionNode)
-        const list = ({ node }) => (subscriptionNode === node)
-        const each = (x) => {
-          const z = subscriptionList.findIndex((y) => x === y)
-          subscriptionList
-            .splice(z, 1)
-            .shift().stop()
-        }
-        callOut.call(subscriptionNode, face, {
-          node: () => subscriptionNode,
-          stop: () => {
-            const a = subscriptionList.filter(list)
-            if (a.length === 0) return false
-            a.forEach(each)
-            return true
-          },
-          index: () => (
-            subscriptionList.findIndex(list)
-          ),
-          size: () => subscriptionList.length
-        }, i, j)
-      } while ((i = i + 1) < j)
-    }
-
-    return {
-      stopAll: () => k.stopAll(subscriptionList),
-      listAll: () => k.listAll(subscriptionList)
-    }
-  },
-  toArray: () => {
-    const q = new Query()
-    const nodeList = q.queryForNodeList(selector)
-    return Array.from(nodeList)
   }
-})
+}
 
 export default class Rasher {
   find = find

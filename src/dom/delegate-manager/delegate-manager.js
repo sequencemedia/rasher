@@ -1,4 +1,10 @@
 import {
+  SUPPORTS_ADD,
+  SUPPORTS_REMOVE,
+
+  SUPPORTS_ATTACH,
+  SUPPORTS_DETACH,
+
   ATTACH,
   DETACH
 } from '~/bom/rasher'
@@ -21,11 +27,11 @@ import {
 
 const eventManager = new EventManager()
 
-const attachDelegateWithPhase = (type, element, { delegate, phase }) => { eventManager.attach(type, element, delegate, phase) }
+function attachDelegateWithPhase (type, element, { delegate, phase }) { eventManager.attach(type, element, delegate, phase) }
 
-const detachDelegateWithPhase = (type, element, { delegate, phase }) => { eventManager.detach(type, element, delegate, phase) }
+function detachDelegateWithPhase (type, element, { delegate, phase }) { eventManager.detach(type, element, delegate, phase) }
 
-const attachDelegate = (type, element, subscription) => {
+function attachDelegate (type, element, subscription) {
   const {
     supplementary
   } = subscription
@@ -47,7 +53,7 @@ const attachDelegate = (type, element, subscription) => {
   }
 }
 
-const detachDelegate = (type, element, subscription) => {
+function detachDelegate (type, element, subscription) {
   const {
     supplementary
   } = subscription
@@ -69,29 +75,31 @@ const detachDelegate = (type, element, subscription) => {
   }
 }
 
-export const create = (type, element, selector, handler, context) => (e) => {
-  const normalizedEvent = eventManager.normalizeEvent(e)
-  const targetNode = eventManager.eventTargetFor(normalizedEvent)
-  if (targetNode.disabled) {
-    return false
-  } else {
-    const match = new Match(new Query(element))
-    const ELEMENT = match.matchFrom(targetNode, selector)
-    return (ELEMENT)
-      ? handler.call(context || ELEMENT, new (eventManager.eventFacadeFor(type))(normalizedEvent, ELEMENT))
-      : false
+export function create (type, element, selector, handler, context) {
+  return function (e) {
+    const normalizedEvent = eventManager.normalizeEvent(e)
+    const targetNode = eventManager.eventTargetFor(normalizedEvent)
+    if (targetNode.disabled) {
+      return false
+    } else {
+      const match = new Match(new Query(element))
+      const ELEMENT = match.matchFrom(targetNode, selector)
+      return (ELEMENT)
+        ? handler.call(context || ELEMENT, new (eventManager.eventFacadeFor(type))(normalizedEvent, ELEMENT))
+        : false
+    }
   }
 }
 
-export const attach = (ATTACH === 1)
+export const attach = (ATTACH === SUPPORTS_ADD)
   ? attachDelegateWithPhase
-  : (ATTACH === 3)
+  : (ATTACH === SUPPORTS_ATTACH)
     ? attachDelegate
     : notSupported
 
-export const detach = (DETACH === 2)
+export const detach = (DETACH === SUPPORTS_REMOVE)
   ? detachDelegateWithPhase
-  : (DETACH === 5)
+  : (DETACH === SUPPORTS_DETACH)
     ? detachDelegate
     : notSupported
 

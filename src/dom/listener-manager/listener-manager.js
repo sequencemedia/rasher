@@ -1,4 +1,10 @@
 import {
+  SUPPORTS_ADD,
+  SUPPORTS_REMOVE,
+
+  SUPPORTS_ATTACH,
+  SUPPORTS_DETACH,
+
   ATTACH,
   DETACH
 } from '~/bom/rasher'
@@ -13,26 +19,30 @@ import {
 
 const eventManager = new EventManager()
 
-const attachListenerWithPhase = (type, element, { listener, phase }) => { eventManager.attach(type, element, listener, phase) }
+function attachListenerWithPhase (type, element, { listener, phase }) { eventManager.attach(type, element, listener, phase) }
 
-const detachListenerWithPhase = (type, element, { listener, phase }) => { eventManager.detach(type, element, listener, phase) }
+function detachListenerWithPhase (type, element, { listener, phase }) { eventManager.detach(type, element, listener, phase) }
 
-const attachListener = (type, element, { listener }) => { eventManager.attach(type, element, listener) }
+function attachListener (type, element, { listener }) { eventManager.attach(type, element, listener) }
 
-const detachListener = (type, element, { listener }) => { eventManager.detach(type, element, listener) }
+function detachListener (type, element, { listener }) { eventManager.detach(type, element, listener) }
 
-export const create = (type, element, handler, context = element) => (e) => (!element.disabled)
-  ? handler.call(context, new (eventManager.eventFacadeFor(type))(eventManager.normalizeEvent(e), element))
-  : false
+export function create (type, element, handler, context = element) {
+  return function (e) {
+    return (!element.disabled)
+      ? handler.call(context, new (eventManager.eventFacadeFor(type))(eventManager.normalizeEvent(e), element))
+      : false
+  }
+}
 
-export const attach = (ATTACH === 1)
+export const attach = (ATTACH === SUPPORTS_ADD)
   ? attachListenerWithPhase
-  : (ATTACH === 3)
+  : (ATTACH === SUPPORTS_ATTACH)
     ? attachListener
     : notSupported
 
-export const detach = (DETACH === 2)
+export const detach = (DETACH === SUPPORTS_REMOVE)
   ? detachListenerWithPhase
-  : (DETACH === 5)
+  : (DETACH === SUPPORTS_DETACH)
     ? detachListener
     : notSupported
