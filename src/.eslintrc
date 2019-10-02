@@ -1,0 +1,16 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": [
+        "index.js"
+      ],
+      "rules": {
+        "no-cond-assign": "off"
+      }
+    }
+  ]
+}

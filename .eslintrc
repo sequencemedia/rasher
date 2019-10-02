@@ -4,15 +4,7 @@
   },
   "extends": "standard",
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 10
   },
-  "parser": "babel-eslint",
-  "overrides": [
-   {
-    "files": ["src/index.js"],
-       "rules": {
-          "no-cond-assign": "off"
-       }
-   }
-  ]
+  "parser": "babel-eslint"
 }
