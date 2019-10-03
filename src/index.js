@@ -83,6 +83,9 @@ function delegateFacade (rasher, list, node, selector) {
   return {
     on (type) {
       if (typeof type !== 'string') return null
+
+      /* Else */
+
       return {
         do (handler, { context, phase } = {}) {
           if ((handler || false).constructor !== Function) return null
@@ -106,6 +109,9 @@ function listenerFacade (rasher, list, node) {
   return {
     on (type) {
       if (typeof type !== 'string') return null
+
+      /* Else */
+
       return {
         do (handler, { context, phase } = {}) {
           if ((handler || false).constructor !== Function) return null
@@ -129,12 +135,19 @@ export function find (selector) {
   return {
     delegateTo (delegate) {
       return {
-        then (callOut) {
+        then (callOut) { /* If no `callOut` */
+          if ((callOut || false).constructor !== Function) {
+            return {
+              stopAll () { return false },
+              listAll () { return [] }
+            }
+          }
+
+          /* Else */
+
           const rasher = delegateRasher()
           const q = rasher.query()
           const k = rasher.rasher()
-
-          if ((callOut || false).constructor !== Function) return { stopAll () { return false }, listAll () { return [] } }
 
           const nodeList = q.queryForNodeList(delegate)
 
@@ -191,8 +204,15 @@ export function find (selector) {
         }
       }
     },
-    then (callOut) {
-      if ((callOut || false).constructor !== Function) return { stopAll () { return false }, listAll () { return [] } }
+    then (callOut) { /* If no `callOut` */
+      if ((callOut || false).constructor !== Function) {
+        return {
+          stopAll () { return false },
+          listAll () { return [] }
+        }
+      }
+
+      /* Else */
 
       const rasher = listenerRasher()
       const q = rasher.query()
