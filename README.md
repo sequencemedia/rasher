@@ -21,7 +21,7 @@ With Rasher, `listeners` and `delegates` are indistinguishable, and have only a 
 
 #### Listeners
 
-```
+```javascript
 import Rasher from 'rasher'
 
 const rasher = new Rasher()
@@ -39,7 +39,7 @@ Second, we use `then` to interact with the DOM elements which have been found.
 
 #### Delegates
 
-```
+```javascript
 import Rasher from 'rasher'
 
 const rasher = new Rasher()
@@ -70,7 +70,8 @@ The `callOut` is called once for each DOM element matching the query. It receive
 2. A `length`
 
 So:
-```
+
+```javascript
 rasher
   .find('form input[type="radio"]')
   .then((r, index, length) => {
@@ -81,7 +82,8 @@ rasher
 The plain object is named `r`. The `index` identifies the position of the current _element_ as though iterating through an array, while `length` is the total number of _elements_ to iterate over.
 
 Or:
-```
+
+```javascript
 rasher
   .find('form input[type="radio"]')
   .delegateTo('form')
@@ -89,11 +91,12 @@ rasher
     /* */
   })
 ```
+
 The plain object is named `r`. Here, the `index` identifies the position of the current _delegate element_ as though iterating through an array, while `length` is the total number of _delegate elements_ to iterate over.
 
 In either case, the plain object is the entry point for attaching handlers. It follows the pattern `on` ... `do`.
 
-```
+```javascript
 r.on('click').do((event) => { /* */ })
 ```
 
@@ -101,7 +104,7 @@ r.on('click').do((event) => { /* */ })
 
 Similarly, whether we want to detach a `listener` or a `delegate`, we do the work with the return value from `then`.
 
-```
+```javascript
 const R = rasher
   .find('form input[type="radio"]')
   .then((r, index, length) => {
@@ -117,13 +120,13 @@ Invoking `stopAll` will detach handlers from all listener and delegate elements 
 
 Individual handlers are identified by index, and invoking `listAll` will return a plain object with methods for accessing the items in the collection.
 
-```
+```javascript
 {
-  size: () => { },
-  node: (index) => { },
-  type: (index) => { },
-  stop: (index) => { },
-  indexOf: (element) => { }
+  size () { },
+  node (index) { },
+  type (index) { },
+  stop (index) { },
+  indexOf (element) { }
 }
 ```
 
@@ -133,7 +136,6 @@ Individual handlers are identified by index, and invoking `listAll` will return 
 4. `stop` removes the handler, as well as the object at this position in the collection
 
 If `size()` returns `1` then we can call `stop(0)` to remove both the handler from the DOM and the item from the collection. In this case, the return value from `stop(0)` will be true.
-
 
 Another invocation of `size()` will return `0`, and another invocation of `stop(0)` will return false.
 
