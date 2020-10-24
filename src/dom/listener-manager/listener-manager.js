@@ -38,11 +38,11 @@ export function create (type, element, handler, context = element) {
 export const attach = (ATTACH === SUPPORTS_ADD)
   ? attachListenerWithPhase
   : (ATTACH === SUPPORTS_ATTACH)
-    ? attachListener
-    : notSupported
+      ? attachListener
+      : notSupported
 
 export const detach = (DETACH === SUPPORTS_REMOVE)
   ? detachListenerWithPhase
   : (DETACH === SUPPORTS_DETACH)
-    ? detachListener
-    : notSupported
+      ? detachListener
+      : notSupported

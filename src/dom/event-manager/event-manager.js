@@ -33,15 +33,15 @@ export const attach = (
   (ATTACH === SUPPORTS_ADD)
     ? attachEventListener
     : (ATTACH === SUPPORTS_ATTACH)
-      ? attachEvent
-      : notSupported)
+        ? attachEvent
+        : notSupported)
 
 export const detach = (
   (DETACH === SUPPORTS_REMOVE)
     ? detachEventListener
     : (DETACH === SUPPORTS_DETACH)
-      ? detachEvent
-      : notSupported)
+        ? detachEvent
+        : notSupported)
 
 export const normalizeEvent = (e = window.event) => e
 
@@ -56,5 +56,5 @@ export const eventFacadeFor = (
   (FACADE === EVENT_LISTENER)
     ? eventListenerFacade
     : (FACADE === EVENT)
-      ? eventFacade
-      : notSupported)
+        ? eventFacade
+        : notSupported)

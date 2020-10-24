@@ -157,5 +157,5 @@ export const subscribe = (
   (FACADE === DELEGATE_WITH_PHASE)
     ? delegateWithPhase
     : (FACADE === DELEGATE)
-      ? delegate
-      : notSupported)
+        ? delegate
+        : notSupported)

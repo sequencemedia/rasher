@@ -9,8 +9,8 @@ export default function eventListenerFacade (type) {
   return (type === 'change')
     ? ChangeEventFacade
     : (type === 'focus' || type === 'blur')
-      ? FocusEventFacade
-      : type.startsWith('key')
-        ? KeyboardEventFacade
-        : MouseEventFacade
+        ? FocusEventFacade
+        : type.startsWith('key')
+          ? KeyboardEventFacade
+          : MouseEventFacade
 }

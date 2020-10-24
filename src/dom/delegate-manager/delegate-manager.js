@@ -94,14 +94,14 @@ export function create (type, element, selector, handler, context) {
 export const attach = (ATTACH === SUPPORTS_ADD)
   ? attachDelegateWithPhase
   : (ATTACH === SUPPORTS_ATTACH)
-    ? attachDelegate
-    : notSupported
+      ? attachDelegate
+      : notSupported
 
 export const detach = (DETACH === SUPPORTS_REMOVE)
   ? detachDelegateWithPhase
   : (DETACH === SUPPORTS_DETACH)
-    ? detachDelegate
-    : notSupported
+      ? detachDelegate
+      : notSupported
 
 export class DelegateManager {
   create = create
