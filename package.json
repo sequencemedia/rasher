@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/register": "^7.15.3",
     "babel-plugin-module-resolver": "^4.1.0",
-    "core-js": "^3.16.1",
+    "core-js": "^3.16.2",
     "eslint": "^7.32.0",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "husky": "^7.0.1",
