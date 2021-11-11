@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "main": "./index.js",
   "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
@@ -41,7 +41,7 @@
     "eslint": "^8.2.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-import-resolver-babel-module": "^5.3.1",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "gulp": "^4.0.2",
