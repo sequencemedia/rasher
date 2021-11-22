@@ -3,9 +3,19 @@
 **/node_modules/**/*
 **/npm-debug.log
 
+.circleci
+.github
+.husky
+.editorconfig
+.eslintignore
+
 # NPM
 .npmrc
 .npmignore
 
-.editorconfig
-.eslintignore
+# NVM
+.nvmrc
+
+# Build
+build
+gulpfile.js

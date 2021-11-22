@@ -6,7 +6,7 @@
   "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
   "license": "MIT",
   "engines": {
-    "node": ">=12.9.0"
+    "node": ">=16.13.0"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
     "pre-commit": "npm run lint && npm run build && git add lib && npm run gulp -- pre-commit"
   },
   "dependencies": {
-    "mock-browser": "^0.92.14",
     "sizzle": "^2.3.6"
   },
   "devDependencies": {
