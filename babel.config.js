@@ -16,6 +16,7 @@ const presets = [
 
 const plugins = [
   '@babel/proposal-class-properties',
+  '@babel/proposal-export-default-from',
   [
     'module-resolver', {
       root: ['./src'],

@@ -4,7 +4,7 @@ import {
   detach
 } from './listener-manager'
 
-export class ListenerManager {
+export default class ListenerManager {
   create = create
 
   attach = attach

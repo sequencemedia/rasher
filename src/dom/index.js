@@ -1,7 +1,3 @@
-export {
-  Match
-} from './match'
+export Match from './match'
 
-export {
-  Query
-} from './query'
+export Query from './query'

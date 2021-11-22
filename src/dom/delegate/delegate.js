@@ -12,24 +12,22 @@ import {
   notSupported
 } from '~/dom/rasher'
 
-import {
-  DelegateManager
-} from '~/dom/delegate-manager'
+import DelegateManager from '~/dom/delegate-manager'
 
 const DELEGATE_WITH_PHASE = SUPPORTS_ADD + SUPPORTS_REMOVE
 const DELEGATE = SUPPORTS_ATTACH + SUPPORTS_DETACH
 
-const delegateManager = new DelegateManager()
+const DELEGATE_MANAGER = new DelegateManager()
 
 function delegateWithPhase (type, element, selector, handler, context, phase = false) {
   const subscription = {
-    delegate: delegateManager.create(type, element, selector, handler, context),
+    delegate: DELEGATE_MANAGER.create(type, element, selector, handler, context),
     phase: (type === 'focus' || type === 'blur') ? true : !!phase
   }
-  delegateManager.attach(type, element, subscription)
+  DELEGATE_MANAGER.attach(type, element, subscription)
   return {
     stop () {
-      delegateManager.detach(type, element, subscription)
+      DELEGATE_MANAGER.detach(type, element, subscription)
     }
   }
 }
@@ -37,7 +35,7 @@ function delegateWithPhase (type, element, selector, handler, context, phase = f
 function getChangeSubscription (type, element, selector, handler, context) {
   const subscription = {
     type,
-    delegate: delegateManager.create(type, element, selector, handler, context),
+    delegate: DELEGATE_MANAGER.create(type, element, selector, handler, context),
     supplementary: [
       {
         type: 'beforeactivate',
@@ -96,7 +94,7 @@ function getFocusSubscription (type, element, selector, handler, context) {
     delegate: ((delegate) => () => {
       event.srcElement.detachEvent('onfocus', subscription.delegate) // eslint-disable-line
       return delegate()
-    })(delegateManager.create(type, element, selector, handler, context)),
+    })(DELEGATE_MANAGER.create(type, element, selector, handler, context)),
     supplementary: [
       {
         type: 'focusin',
@@ -114,7 +112,7 @@ function getBlurSubscription (type, element, selector, handler, context) {
     delegate: ((delegate) => () => {
       event.srcElement.detachEvent('onblur', subscription.delegate) // eslint-disable-line
       return delegate()
-    })(delegateManager.create(type, element, selector, handler, context)),
+    })(DELEGATE_MANAGER.create(type, element, selector, handler, context)),
     supplementary: [
       {
         type: 'focusout',
@@ -141,14 +139,14 @@ function delegate (type, element, selector, handler, context) {
     default:
       subscription = {
         type,
-        delegate: delegateManager.create(type, element, selector, handler, context)
+        delegate: DELEGATE_MANAGER.create(type, element, selector, handler, context)
       }
   }
-  delegateManager.attach(type, element, subscription)
+  DELEGATE_MANAGER.attach(type, element, subscription)
   return {
     subscription () { return subscription },
     stop () {
-      delegateManager.detach(type, element, subscription)
+      DELEGATE_MANAGER.detach(type, element, subscription)
     }
   }
 }

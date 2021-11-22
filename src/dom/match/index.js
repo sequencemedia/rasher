@@ -2,13 +2,11 @@ import {
   MATCH
 } from '~/bom/rasher'
 
-import {
-  Query
-} from '~/dom/query'
+import Query from '~/dom/query'
 
 import Sizzle from 'sizzle'
 
-export class Match {
+export default class Match {
   constructor (query) {
     this.query = query || new Query()
   }

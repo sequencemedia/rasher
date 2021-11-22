@@ -13,24 +13,22 @@ import {
   notSupported
 } from '~/dom/rasher'
 
-import {
-  EventManager
-} from '~/dom/event-manager'
+import EventManager from '~/dom/event-manager'
 
-const eventManager = new EventManager()
+const EVENT_MANAGER = new EventManager()
 
-function attachListenerWithPhase (type, element, { listener, phase }) { eventManager.attach(type, element, listener, phase) }
+function attachListenerWithPhase (type, element, { listener, phase }) { EVENT_MANAGER.attach(type, element, listener, phase) }
 
-function detachListenerWithPhase (type, element, { listener, phase }) { eventManager.detach(type, element, listener, phase) }
+function detachListenerWithPhase (type, element, { listener, phase }) { EVENT_MANAGER.detach(type, element, listener, phase) }
 
-function attachListener (type, element, { listener }) { eventManager.attach(type, element, listener) }
+function attachListener (type, element, { listener }) { EVENT_MANAGER.attach(type, element, listener) }
 
-function detachListener (type, element, { listener }) { eventManager.detach(type, element, listener) }
+function detachListener (type, element, { listener }) { EVENT_MANAGER.detach(type, element, listener) }
 
 export function create (type, element, handler, context = element) {
   return function (e) {
     return (!element.disabled)
-      ? handler.call(context, new (eventManager.eventFacadeFor(type))(eventManager.normalizeEvent(e), element))
+      ? handler.call(context, new (EVENT_MANAGER.eventFacadeFor(type))(EVENT_MANAGER.normalizeEvent(e), element))
       : false
   }
 }

@@ -2,6 +2,6 @@ import {
   subscribe
 } from './listener'
 
-export class Listener {
+export default class Listener {
   subscribe = subscribe
 }

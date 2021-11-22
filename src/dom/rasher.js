@@ -1,10 +1,6 @@
-import {
-  Listener
-} from './listener'
+import Listener from './listener'
 
-import {
-  Delegate
-} from './delegate'
+import Delegate from './delegate'
 
 export const notSupported = () => { throw new Error('Not supported') }
 

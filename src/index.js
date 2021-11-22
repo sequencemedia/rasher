@@ -1,14 +1,8 @@
-import {
-  Listener
-} from './dom/listener'
+import Listener from './dom/listener'
 
-import {
-  Delegate
-} from './dom/delegate'
+import Delegate from './dom/delegate'
 
-import {
-  Query
-} from './dom/query'
+import Query from './dom/query'
 
 function stopFactory (subscription) {
   return function stop () {

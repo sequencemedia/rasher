@@ -2,6 +2,6 @@ import {
   subscribe
 } from './delegate'
 
-export class Delegate {
+export default class Delegate {
   subscribe = subscribe
 }

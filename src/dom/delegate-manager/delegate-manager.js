@@ -13,23 +13,17 @@ import {
   notSupported
 } from '~/dom/rasher'
 
-import {
-  EventManager
-} from '~/dom/event-manager'
+import EventManager from '~/dom/event-manager'
 
-import {
-  Match
-} from '~/dom/match'
+import Match from '~/dom/match'
 
-import {
-  Query
-} from '~/dom/query'
+import Query from '~/dom/query'
 
-const eventManager = new EventManager()
+const EVENT_MANAGER = new EventManager()
 
-function attachDelegateWithPhase (type, element, { delegate, phase }) { eventManager.attach(type, element, delegate, phase) }
+function attachDelegateWithPhase (type, element, { delegate, phase }) { EVENT_MANAGER.attach(type, element, delegate, phase) }
 
-function detachDelegateWithPhase (type, element, { delegate, phase }) { eventManager.detach(type, element, delegate, phase) }
+function detachDelegateWithPhase (type, element, { delegate, phase }) { EVENT_MANAGER.detach(type, element, delegate, phase) }
 
 function attachDelegate (type, element, subscription) {
   const {
@@ -43,13 +37,13 @@ function attachDelegate (type, element, subscription) {
         type,
         delegate
       } = supplementary[index]
-      eventManager.attach(type, element, delegate)
+      EVENT_MANAGER.attach(type, element, delegate)
     }
   } else {
     const {
       delegate
     } = subscription
-    eventManager.attach(type, element, delegate)
+    EVENT_MANAGER.attach(type, element, delegate)
   }
 }
 
@@ -65,27 +59,27 @@ function detachDelegate (type, element, subscription) {
         type,
         delegate
       } = supplementary[index]
-      eventManager.detach(type, element, delegate)
+      EVENT_MANAGER.detach(type, element, delegate)
     }
   } else {
     const {
       delegate
     } = subscription
-    eventManager.detach(type, element, delegate)
+    EVENT_MANAGER.detach(type, element, delegate)
   }
 }
 
 export function create (type, element, selector, handler, context) {
   return function (e) {
-    const normalizedEvent = eventManager.normalizeEvent(e)
-    const targetNode = eventManager.eventTargetFor(normalizedEvent)
+    const normalizedEvent = EVENT_MANAGER.normalizeEvent(e)
+    const targetNode = EVENT_MANAGER.eventTargetFor(normalizedEvent)
     if (targetNode.disabled) {
       return false
     } else {
       const match = new Match(new Query(element))
       const ELEMENT = match.matchFrom(targetNode, selector)
       return (ELEMENT)
-        ? handler.call(context || ELEMENT, new (eventManager.eventFacadeFor(type))(normalizedEvent, ELEMENT))
+        ? handler.call(context || ELEMENT, new (EVENT_MANAGER.eventFacadeFor(type))(normalizedEvent, ELEMENT))
         : false
     }
   }
@@ -103,7 +97,7 @@ export const detach = (DETACH === SUPPORTS_REMOVE)
       ? detachDelegate
       : notSupported
 
-export class DelegateManager {
+export default class DelegateManager {
   create = create
 
   attach = attach

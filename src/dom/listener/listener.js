@@ -1,18 +1,16 @@
-import {
-  ListenerManager
-} from '~/dom/listener-manager'
+import ListenerManager from '~/dom/listener-manager'
 
-const listenerManager = new ListenerManager()
+const LISTENER_MANAGER = new ListenerManager()
 
 export function subscribe (type, element, handler, context, phase = false) {
   const subscription = {
-    listener: listenerManager.create(type, element, handler, context),
+    listener: LISTENER_MANAGER.create(type, element, handler, context),
     phase: !!phase
   }
-  listenerManager.attach(type, element, subscription)
+  LISTENER_MANAGER.attach(type, element, subscription)
   return {
     stop () {
-      listenerManager.detach(type, element, subscription)
+      LISTENER_MANAGER.detach(type, element, subscription)
     }
   }
 }

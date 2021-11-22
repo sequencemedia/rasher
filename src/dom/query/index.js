@@ -21,7 +21,7 @@ import {
 
 import Sizzle from 'sizzle'
 
-export class Query {
+export default class Query {
   constructor (node) {
     this.node = node || document.documentElement
   }

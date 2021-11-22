@@ -4,7 +4,7 @@ import {
   detach
 } from './delegate-manager'
 
-export class DelegateManager {
+export default class DelegateManager {
   create = create
 
   attach = attach

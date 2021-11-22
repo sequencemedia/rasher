@@ -8,7 +8,7 @@ import {
 
 let eventManager
 
-export class EventManager {
+export default class EventManager {
   constructor () {
     return (
       eventManager || (

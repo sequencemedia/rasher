@@ -1,4 +1,4 @@
-const keyMap = {
+const keyMap = new Map(Object.entries({
   25: 9, // SHIFT-TAB
   63232: 38, // u
   63233: 40, // d
@@ -9,7 +9,7 @@ const keyMap = {
   63275: 35, // END
   63276: 33, // page u
   63277: 34 // page d
-}
+}))
 
 function initialize (event, currentTarget) {
   this.target = event.target || event.srcElement
@@ -19,13 +19,13 @@ function initialize (event, currentTarget) {
 }
 
 function ingestEvent (facadeMap, event, eventFacade) {
-  let key
-  for (key in facadeMap) {
-    if (key in event) {
-      const KEY = facadeMap[key]
-      eventFacade[KEY] = event[key]
-    }
-  }
+  facadeMap
+    .entries()
+    .forEach(([key, KEY]) => {
+      if (Reflect.has(event, key)) {
+        eventFacade[KEY] = Reflect.get(event, key)
+      }
+    })
 }
 
 class EventFacade {
@@ -60,7 +60,7 @@ export class FocusEventFacade extends EventFacade {
 }
 
 export class MouseEventFacade extends EventFacade {
-  static map = {
+  static map = new Map(Object.entries({
     ctrlKey: 'ctrl',
     altKey: 'alt',
     metaKey: 'meta',
@@ -70,12 +70,12 @@ export class MouseEventFacade extends EventFacade {
     clientY: 'clientY',
     pageX: 'pageX',
     pageY: 'pageY'
-  }
+  }))
 
   constructor (event, currentTarget) {
     initialize.call(super(), event, currentTarget)
-    let key
-    if (typeof ((key = event.keyCode || event.charCode) in keyMap ? keyMap[key] : key) === 'number') {
+    const key = event.keyCode || event.charCode
+    if (typeof (keyMap.has(key) ? keyMap.get(key) : key) === 'number') {
       this.key = key
     }
     ingestEvent(MouseEventFacade.map, event, this)
@@ -83,18 +83,18 @@ export class MouseEventFacade extends EventFacade {
 }
 
 export class KeyboardEventFacade extends EventFacade {
-  static map = {
+  static map = new Map(Object.entries({
     ctrlKey: 'ctrl',
     altKey: 'alt',
     metaKey: 'meta',
     shiftKey: 'shiftKey',
     altGraphKey: 'altGraph'
-  }
+  }))
 
   constructor (event, currentTarget) {
     initialize.call(super(), event, currentTarget)
-    let key
-    if (((key = event.keyCode || event.charCode) in keyMap ? keyMap[key] : key) === 'number') {
+    const key = event.keyCode || event.charCode
+    if (typeof (keyMap.has(key) ? keyMap.get(key) : key) === 'number') {
       this.key = key
     }
     ingestEvent(KeyboardEventFacade.map, event, this)
