@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "1.0.109",
+  "version": "1.0.110",
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "main": "./index.js",
   "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
@@ -29,13 +29,13 @@
     "sizzle": "^2.3.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/eslint-parser": "^7.16.5",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-export-default-from": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.16.9",
+    "@babel/register": "^7.17.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "core-js": "^3.21.0",
     "eslint": "7.32.0",
