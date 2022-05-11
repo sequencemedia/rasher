@@ -1,21 +1,26 @@
 .DS_Store
 
-**/node_modules/**/*
-**/npm-debug.log
-
 .circleci
-.github
 .husky
+
 .editorconfig
+
 .eslintignore
+.eslintrc
+
+.github
+.gitignore
 
 # NPM
-.npmrc
 .npmignore
+.npmrc
 
 # NVM
 .nvmrc
 
+# Deps
+.depsrc
+
 # Build
 build
-gulpfile.js
+gulpfile.*
