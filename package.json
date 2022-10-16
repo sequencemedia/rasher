@@ -23,7 +23,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "gulp": "gulp --color",
-    "pre-commit": "npm run lint && npm run build && git add lib && npm run gulp -- pre-commit"
+    "pre-commit": "npm run lint && npm run build && git add lib && npm run gulp -- pre-commit",
+    "prepare": "husky install"
   },
   "dependencies": {
     "sizzle": "^2.3.7"
