@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "1.0.274",
+  "version": "1.0.275",
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "main": "./index.js",
   "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
@@ -27,7 +27,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "sizzle": "^2.3.7"
+    "sizzle": "^2.3.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
