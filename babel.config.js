@@ -19,8 +19,6 @@ const plugins = [
   '@babel/proposal-export-default-from',
   [
     'module-resolver', {
-      root: ['./src'],
-      cwd: 'babelrc',
       alias: {
         '@sequencemedia/rasher': '.',
         '~': './src'
@@ -31,6 +29,7 @@ const plugins = [
 
 module.exports = {
   compact: true,
+  comments: false,
   presets,
   plugins
 }
