@@ -37,8 +37,8 @@
     "@babel/register": "^7.22.5",
     "@sequencemedia/hooks": "^1.0.443",
     "babel-plugin-module-resolver": "^5.0.0",
-    "core-js": "^3.31.1",
-    "eslint": "^8.45.0",
+    "core-js": "^3.32.0",
+    "eslint": "^8.46.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "husky": "^8.0.3"
