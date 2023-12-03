@@ -39,7 +39,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.23.3",
     "@babel/preset-env": "^7.23.5",
     "@babel/register": "^7.22.15",
-    "@sequencemedia/hooks": "^1.0.465",
+    "@sequencemedia/hooks": "^1.0.466",
     "babel-plugin-module-resolver": "^5.0.0",
     "core-js": "^3.33.3",
     "eslint": "^8.55.0",
