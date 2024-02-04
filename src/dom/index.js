@@ -1,3 +1,3 @@
-export Match from './match'
+export { default as Match } from './match'
 
-export Query from './query'
+export { default as Query } from './query'
