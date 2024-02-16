@@ -26,7 +26,7 @@
     "build:watch": "npm run build -- -w",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "sizzle": "^2.3.10"
@@ -37,7 +37,7 @@
     "@babel/eslint-parser": "^7.23.10",
     "@babel/preset-env": "^7.23.9",
     "@babel/register": "^7.23.7",
-    "@sequencemedia/hooks": "^1.0.480",
+    "@sequencemedia/hooks": "^1.0.481",
     "babel-plugin-module-resolver": "^5.0.0",
     "core-js": "^3.36.0",
     "eslint": "^8.56.0",
