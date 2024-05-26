@@ -17,16 +17,16 @@
     "url": "git@github.com/sequencemedia/rasher.git"
   },
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "prebuild": "npm run clean",
-    "clean": "rm -rf lib",
     "babel": "babel src -d lib",
     "babel:watch": "npm run babel -- -w",
     "build": "npm run babel --",
     "build:watch": "npm run build -- -w",
+    "clean": "rm -rf lib",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky"
+    "prebuild": "npm run clean",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "sizzle": "^2.3.10"
