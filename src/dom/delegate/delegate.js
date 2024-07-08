@@ -42,7 +42,7 @@ function getChangeSubscription (type, element, selector, handler, context) {
         delegate () { // can use 'attachEvent()' and 'detachEvent()' on DOM
           let nodeName
           let targetNode
-          if ((nodeName = (targetNode = event.srcElement).nodeName.toLowerCase()) === 'select') { // eslint-disable-line
+          if ((nodeName = (targetNode = event.target).nodeName.toLowerCase()) === 'select') {
             targetNode.attachEvent('onchange', subscription.delegate)
           } else if (nodeName === 'input') {
             const nodeType = targetNode.type
@@ -66,7 +66,7 @@ function getChangeSubscription (type, element, selector, handler, context) {
         delegate () { // can use 'attachEvent()' and 'detachEvent()' on DOM
           let nodeName
           let targetNode
-          if ((nodeName = (targetNode = event.srcElement).nodeName.toLowerCase()) === 'select') { // eslint-disable-line
+          if ((nodeName = (targetNode = event.target).nodeName.toLowerCase()) === 'select') {
             targetNode.detachEvent('onchange', subscription.delegate)
           } else if (nodeName === 'input') {
             const nodeType = targetNode.type
@@ -89,39 +89,43 @@ function getChangeSubscription (type, element, selector, handler, context) {
 }
 
 function getFocusSubscription (type, element, selector, handler, context) {
-  return {
+  const subscription = {
     type,
     delegate: ((delegate) => () => {
-      event.srcElement.detachEvent('onfocus', subscription.delegate) // eslint-disable-line
+      event.target.detachEvent('onfocus', subscription.delegate)
       return delegate()
     })(DELEGATE_MANAGER.create(type, element, selector, handler, context)),
     supplementary: [
       {
         type: 'focusin',
         delegate () { // can use 'attachEvent()' and 'detachEvent()' on DOM
-          event.srcElement.attachEvent('onfocus', subscription.delegate) // eslint-disable-line
+          event.target.attachEvent('onfocus', subscription.delegate)
         }
       }
     ]
   }
+
+  return subscription
 }
 
 function getBlurSubscription (type, element, selector, handler, context) {
-  return {
+  const subscription = {
     type,
     delegate: ((delegate) => () => {
-      event.srcElement.detachEvent('onblur', subscription.delegate) // eslint-disable-line
+      event.target.detachEvent('onblur', subscription.delegate)
       return delegate()
     })(DELEGATE_MANAGER.create(type, element, selector, handler, context)),
     supplementary: [
       {
         type: 'focusout',
         delegate () { // can use 'attachEvent()' and 'detachEvent()' on DOM
-          event.srcElement.attachEvent('onblur', subscription.delegate) // eslint-disable-line
+          event.target.attachEvent('onblur', subscription.delegate)
         }
       }
     ]
   }
+
+  return subscription
 }
 
 function delegate (type, element, selector, handler, context) {

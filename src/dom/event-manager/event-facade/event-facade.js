@@ -36,7 +36,7 @@ export class FocusEventFacade extends EventFacade {
   }
 }
 
-export class TouchEventFacade extends EventFacade { // eslint-disable-line
+export class TouchEventFacade extends EventFacade {
   constructor (event, currentTarget) {
     initialize.call(super(), event, currentTarget)
   }
