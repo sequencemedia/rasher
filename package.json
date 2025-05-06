@@ -32,9 +32,9 @@
     "sizzle": "^2.3.10"
   },
   "devDependencies": {
-    "@babel/cli": "^7.27.1",
+    "@babel/cli": "^7.27.2",
     "@babel/core": "^7.27.1",
-    "@babel/preset-env": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
     "@sequencemedia/eslint-config-standard": "^0.2.54",
     "babel-plugin-module-resolver": "^5.0.2",
     "core-js": "^3.42.0",
