@@ -1,6 +1,6 @@
 {
   "name": "rasher",
-  "version": "1.0.648",
+  "version": "1.0.649",
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
   "main": "./index.js",
   "author": {
