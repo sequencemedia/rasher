@@ -35,7 +35,7 @@
     "@babel/cli": "^7.28.0",
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
-    "@sequencemedia/eslint-config-standard": "^0.2.72",
+    "@sequencemedia/eslint-config-standard": "^0.2.73",
     "babel-plugin-module-resolver": "^5.0.2",
     "core-js": "^3.44.0",
     "eslint": "^9.32.0",
