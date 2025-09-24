@@ -35,10 +35,10 @@
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.4",
     "@babel/preset-env": "^7.28.3",
-    "@sequencemedia/eslint-config-standard": "^0.2.84",
+    "@sequencemedia/eslint-config-standard": "^0.2.85",
     "babel-plugin-module-resolver": "^5.0.2",
     "core-js": "^3.45.1",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "globals": "^16.4.0",
     "husky": "^9.1.7"
