@@ -37,7 +37,7 @@
     "@babel/preset-env": "^7.28.3",
     "@sequencemedia/eslint-config-standard": "^0.2.90",
     "babel-plugin-module-resolver": "^5.0.2",
-    "core-js": "^3.45.1",
+    "core-js": "^3.46.0",
     "eslint": "^9.37.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "globals": "^16.4.0",
