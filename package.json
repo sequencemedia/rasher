@@ -32,15 +32,15 @@
     "sizzle": "^2.3.10"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
     "@sequencemedia/eslint-config-standard": "^0.2.107",
-    "babel-plugin-module-resolver": "^5.0.2",
-    "core-js": "^3.47.0",
-    "eslint": "^9.39.2",
+    "babel-plugin-module-resolver": "^5.0.3",
+    "core-js": "^3.49.0",
+    "eslint": "^10.1.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
-    "globals": "^17.0.0",
+    "globals": "^17.4.0",
     "husky": "^9.1.7"
   }
 }
