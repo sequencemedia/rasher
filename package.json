@@ -40,7 +40,7 @@
     "core-js": "^3.49.0",
     "eslint": "^10.2.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
-    "globals": "^17.4.0",
+    "globals": "^17.5.0",
     "husky": "^9.1.7"
   }
 }
