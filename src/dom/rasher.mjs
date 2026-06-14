@@ -1,6 +1,6 @@
-import Listener from './listener'
+import Listener from './listener/index.mjs'
 
-import Delegate from './delegate'
+import Delegate from './delegate/index.mjs'
 
 export const notSupported = () => { throw new Error('Not supported') }
 

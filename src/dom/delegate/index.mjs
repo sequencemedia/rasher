@@ -1,6 +1,6 @@
 import {
   subscribe
-} from './delegate'
+} from './delegate.mjs'
 
 export default class Delegate {
   subscribe = subscribe

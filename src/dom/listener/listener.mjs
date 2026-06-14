@@ -1,4 +1,4 @@
-import ListenerManager from '~/dom/listener-manager'
+import ListenerManager from '#dom/listener-manager'
 
 const LISTENER_MANAGER = new ListenerManager()
 

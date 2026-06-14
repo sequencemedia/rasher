@@ -2,7 +2,8 @@
   "name": "rasher",
   "version": "1.0.698",
   "description": "A web browser DOM event listener and delegate management mechanism. DOM queries with native DOM methods or Sizzle. Supports current and legacy browsers (including IE7)",
-  "main": "./index.js",
+  "main": "./index.mjs",
+  "type": "module",
   "author": {
     "name": "Jonathan Perry for Sequence Media Limited",
     "email": "sequencemedia@sequencemedia.net",
@@ -10,23 +11,16 @@
   },
   "license": "ISC",
   "engines": {
-    "node": ">=18.12.0"
+    "node": ">=22.11.0"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com/sequencemedia/rasher.git"
   },
   "scripts": {
-    "babel": "babel src -d lib",
-    "babel:watch": "npm run babel -- -w",
-    "build": "npm run babel --",
-    "build:watch": "npm run build -- -w",
-    "clean": "rm -rf lib",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prebuild": "npm run clean",
-    "prepare": "husky",
-    "prepublishOnly": "npm run build"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "sizzle": "^2.3.10"
@@ -36,11 +30,29 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "@sequencemedia/eslint-config-standard": "^0.2.107",
-    "babel-plugin-module-resolver": "^5.0.3",
-    "core-js": "^3.49.0",
-    "eslint": "^10.5.0",
-    "eslint-import-resolver-babel-module": "^5.3.2",
+    "eslint": "9.38.0",
     "globals": "^17.6.0",
     "husky": "^9.1.7"
+  },
+  "imports": {
+    "#bom/rasher": "./src/bom/rasher.mjs",
+    "#dom": "./src/dom/index.mjs",
+    "#dom/delegate": "./src/dom/delegate/index.mjs",
+    "#dom/delegate-manager": "./src/dom/delegate-manager/index.mjs",
+    "#dom/delegate-manager/delegate-manager": "./src/dom/delegate-manager/delegate-manager.mjs",
+    "#dom/delegate/delegate": "./src/dom/delegate/delegate.mjs",
+    "#dom/event-manager": "./src/dom/event-manager/index.mjs",
+    "#dom/event-manager/event-facade": "./src/dom/event-facade/index.mjs",
+    "#dom/event-manager/event-facade/event-facade": "./src/dom/event-facade/event-facade/index.mjs",
+    "#dom/event-manager/event-listener-facade": "./src/dom/event-listener-facade/index.mjs",
+    "#dom/event-manager/event-listener-facade/event-listener-facade": "./src/dom/event-listener-facade/event-listener-facade.mjs",
+    "#dom/event-manager/event-manager": "./src/dom/event-manager/event-manager/index.mjs",
+    "#dom/listener": "./src/dom/listener/index.mjs",
+    "#dom/listener-manager": "./src/dom/listener-manager/index.mjs",
+    "#dom/listener-manager/listener-manager": "./src/dom/listener-manager/listener-manager.mjs",
+    "#dom/listener/listener": "./src/dom/listener/listener.mjs",
+    "#dom/match": "./src/dom/match/index.mjs",
+    "#dom/query": "./src/dom/query/index.mjs",
+    "#dom/rasher": "./src/dom/rasher.mjs"
   }
 }

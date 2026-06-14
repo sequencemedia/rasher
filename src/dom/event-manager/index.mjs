@@ -4,7 +4,7 @@ import {
   eventFacadeFor,
   normalizeEvent,
   eventTargetFor
-} from './event-manager'
+} from './event-manager.mjs'
 
 let eventManager
 

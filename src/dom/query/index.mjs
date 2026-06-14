@@ -17,7 +17,7 @@ import {
 
   QUERY,
   MATCH
-} from '~/bom/rasher'
+} from '#bom/rasher'
 
 import Sizzle from 'sizzle'
 

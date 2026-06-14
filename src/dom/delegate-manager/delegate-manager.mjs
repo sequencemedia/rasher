@@ -7,17 +7,17 @@ import {
 
   ATTACH,
   DETACH
-} from '~/bom/rasher'
+} from '#bom/rasher'
 
 import {
   notSupported
-} from '~/dom/rasher'
+} from '#dom/rasher'
 
-import EventManager from '~/dom/event-manager'
+import EventManager from '#dom/event-manager'
 
-import Match from '~/dom/match'
+import Match from '#dom/match'
 
-import Query from '~/dom/query'
+import Query from '#dom/query'
 
 const EVENT_MANAGER = new EventManager()
 

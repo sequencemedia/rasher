@@ -1,8 +1,8 @@
-import Listener from './dom/listener'
+import Listener from './dom/listener/index.mjs'
 
-import Delegate from './dom/delegate'
+import Delegate from './dom/delegate/index.mjs'
 
-import Query from './dom/query'
+import Query from './dom/query/index.mjs'
 
 function stopFactory (subscription) {
   return function stop () {

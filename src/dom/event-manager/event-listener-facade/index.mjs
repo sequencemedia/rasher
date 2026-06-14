@@ -3,7 +3,7 @@ import {
   FocusEventFacade,
   KeyboardEventFacade,
   MouseEventFacade
-} from './event-listener-facade'
+} from './event-listener-facade.mjs'
 
 export default function eventListenerFacade (type) {
   return (type === 'change')

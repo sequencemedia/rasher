@@ -1,8 +1,8 @@
 import {
   MATCH
-} from '~/bom/rasher'
+} from '#bom/rasher'
 
-import Query from '~/dom/query'
+import Query from '#dom/query'
 
 import Sizzle from 'sizzle'
 

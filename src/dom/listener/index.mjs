@@ -1,6 +1,6 @@
 import {
   subscribe
-} from './listener'
+} from './listener.mjs'
 
 export default class Listener {
   subscribe = subscribe

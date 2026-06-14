@@ -8,15 +8,15 @@ import {
   ATTACH,
   DETACH,
   FACADE
-} from '~/bom/rasher'
+} from '#bom/rasher'
 
 import {
   notSupported
-} from '~/dom/rasher'
+} from '#dom/rasher'
 
-import eventListenerFacade from './event-listener-facade'
+import eventListenerFacade from './event-listener-facade/index.mjs'
 
-import eventFacade from './event-facade'
+import eventFacade from './event-facade/index.mjs'
 
 const EVENT_LISTENER = SUPPORTS_ADD + SUPPORTS_REMOVE
 const EVENT = SUPPORTS_ATTACH + SUPPORTS_DETACH

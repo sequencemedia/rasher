@@ -6,13 +6,13 @@ import {
   SUPPORTS_DETACH,
 
   FACADE
-} from '~/bom/rasher'
+} from '#bom/rasher'
 
 import {
   notSupported
-} from '~/dom/rasher'
+} from '#dom/rasher'
 
-import DelegateManager from '~/dom/delegate-manager'
+import DelegateManager from '#dom/delegate-manager'
 
 const DELEGATE_WITH_PHASE = SUPPORTS_ADD + SUPPORTS_REMOVE
 const DELEGATE = SUPPORTS_ATTACH + SUPPORTS_DETACH

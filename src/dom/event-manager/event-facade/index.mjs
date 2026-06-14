@@ -2,7 +2,7 @@ import {
   ChangeEventFacade,
   FocusEventFacade,
   MouseEventFacade
-} from './event-facade'
+} from './event-facade.mjs'
 
 export default function eventFacade (type) {
   return (type === 'change')

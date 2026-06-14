@@ -2,9 +2,9 @@ import {
   create,
   attach,
   detach
-} from './delegate-manager'
+} from './listener-manager.mjs'
 
-export default class DelegateManager {
+export default class ListenerManager {
   create = create
 
   attach = attach
