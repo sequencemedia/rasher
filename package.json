@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/sequencemedia/rasher.git"
+    "url": "git+ssh://git@github.com/sequencemedia/rasher.git"
   },
   "scripts": {
     "lint": "eslint .",
