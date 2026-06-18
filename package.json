@@ -20,15 +20,14 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky || true"
+    "prepare": "node husky.mjs"
   },
   "dependencies": {
     "sizzle": "^2.3.10"
   },
   "devDependencies": {
-    "@babel/cli": "^7.29.7",
-    "@babel/core": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
+    "@babel/core": "7.29.7",
+    "@babel/preset-env": "7.29.7",
     "@sequencemedia/eslint-config-standard": "^0.2.107",
     "eslint": "9.38.0",
     "globals": "^17.6.0",
