@@ -28,8 +28,8 @@
   "devDependencies": {
     "@babel/core": "7.29.7",
     "@babel/preset-env": "7.29.7",
-    "@sequencemedia/eslint-config-standard": "0.2.132",
-    "eslint": "9.38.0",
+    "@sequencemedia/eslint-config-standard": "0.3.2",
+    "eslint": "10.14.0",
     "globals": "^17.14.0",
     "husky": "^9.1.7"
   },
