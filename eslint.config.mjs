@@ -1,13 +1,14 @@
 import globals from 'globals'
-import merge from '@sequencemedia/eslint-config-standard/merge'
+import standard from '@sequencemedia/eslint-config-standard/merge'
 
-export default (
-  merge({
+export default [
+  ...standard({
     files: [
       '**/*.{js,cjs,mjs}'
     ],
     ignores: [
-      'lib/**/*'
+      'lib/**/*',
+      'husky.mjs'
     ],
     languageOptions: {
       globals: {
@@ -18,5 +19,19 @@ export default (
     rules: {
       'no-cond-assign': 'off'
     }
+  }),
+  ...standard({
+    files: [
+      'husky.mjs'
+    ],
+    ignores: [
+      '**/*.{js,cjs,mjs}',
+      'lib/**/*'
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.node
+      }
+    }
   })
-)
+]
